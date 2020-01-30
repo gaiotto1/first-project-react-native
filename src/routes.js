@@ -19,7 +19,7 @@ const Routes = createAppContainer(
         },
         headerTintColor: '#fff',
       },
-    }
+    },
   ),
 );
 
