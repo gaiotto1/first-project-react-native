@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -16,9 +8,22 @@ import {
   StatusBar,
 } from 'react-native';
 
+import './config/ReactotronConfig';
+
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
+
+const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: Colors.lighter,
+  },
+  text: {
+    color: 'red',
+  },
+});
+
+console.tron.log('teste');
 
 export default function App() {
   return (
@@ -36,12 +41,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  text: {
-    color: 'red',
-  },
-});
