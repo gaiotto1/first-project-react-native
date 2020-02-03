@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Keyboard, ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 
@@ -14,12 +15,27 @@ export default class Main extends Component {
     loading: false,
   };
 
+  async componentDidMount() {
+    const users = await AsyncStorage.getItem('users');
+    if (users) {
+      this.setState({ users: JSON.parse(users) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { users } = this.state;
+
+    if (prevState.users !== users) {
+      AsyncStorage.setItem('users', JSON.stringify(users));
+    }
+  }
+
   handleAddUser = async () => {
     const { users, newUser } = this.state;
 
     this.setState({ loading: true });
 
-    const response = await api.get(`/users/${newUser}`);
+    const response = await api.get(`https://api.github.com/users/${newUser}`);
 
     const data = {
       name: response.data.name,
@@ -63,7 +79,7 @@ export default class Main extends Component {
         <List
           data={users}
           keyExtractor={user => user.login}
-          renderItem={(item) => (
+          renderItem={({ item }) => (
             <User>
               <Avatar source={{ uri: item.avatar }} />
               <Name>{item.name}</Name>
