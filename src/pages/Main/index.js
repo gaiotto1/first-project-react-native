@@ -12,7 +12,7 @@ import {
 export default class Main extends Component {
   // eslint-disable-next-line react/sort-comp
   static navigationOptions = {
-    title: 'Usuários',
+    title: '',
   };
 
   // eslint-disable-next-line react/static-property-placement
